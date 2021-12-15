@@ -8,7 +8,7 @@
 
 # Possible ideas to explore in Midas
 
-Will work only if it is possible to get all (or nearly all) of the investments that each VC fund makes.
+Will work only if it is possible to get all (or nearly all) of the investments that each VC fund made in the last X years.
 
 1. PageRank (the way google indexes search results https://en.wikipedia.org/wiki/PageRank) on VC funds. Important: "The underlying assumption is that better VC funds are likely to have more co-investments with other VC funds."
 
@@ -18,9 +18,8 @@ if vc_fund is in brand_name_vc_funds:
     score[vc_fund] = 1
 else:
     scores[vc_fund] = average_score_of_coinvestments[vc_fund]
-    scores[vc_fund] = (sum of scores[co_investement] for each co_investment of the vc_fund)/n_co_investment[vc_fund]
 
-would compute the latter by an iterative algorithm. Would it converge? (all 1s is definitely a solution)
+Compute this by an iterative algorithm. Would it converge (if all scores[vc_fund] is initialized at 0, excpet if it is a brand_name_vc_fund)? (all 1s is definitely a solution)
 
 # Qs / summaries
 
