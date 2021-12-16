@@ -6,12 +6,11 @@ DATADIR = "/Users/eduardoravkin/Desktop/software/vela_eo/Data/midas/"
 ok_thresh = 0.01
 cvg_thresh = 0.01
 
-
-class TestGraphDistances(unittest.TestCase):
+class TestGraphScores(unittest.TestCase):
     
     def test_graph_scores_1(self, ok_thresh = ok_thresh):
             
-            dl = Dataloader(datadir = DATADIR+"test_data/test_data_1.csv")
+            dl = Dataloader(datadir = DATADIR+"test_data/test_graph_1.csv")
             g = dl.load_data_to_graph()
             g.bfs_distance()
             g.calculate_scores(cvg_thresh = cvg_thresh)
@@ -30,7 +29,7 @@ class TestGraphDistances(unittest.TestCase):
 
     def test_graph_scores_2(self, ok_thresh = ok_thresh):
         
-        dl = Dataloader(datadir = DATADIR+"test_data/test_data_2.csv")
+        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_2.csv")
         g = dl.load_data_to_graph()
         g.bfs_distance()
         g.calculate_scores(cvg_thresh = cvg_thresh)
@@ -50,7 +49,7 @@ class TestGraphDistances(unittest.TestCase):
 
     def test_graph_scores_3(self, ok_thresh = ok_thresh):
         
-        dl = Dataloader(datadir = DATADIR+"test_data/test_data_3.csv")
+        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_3.csv")
         g = dl.load_data_to_graph()
         g.bfs_distance()
         g.calculate_scores(cvg_thresh = cvg_thresh)
@@ -72,7 +71,7 @@ class TestGraphDistances(unittest.TestCase):
     
     def test_graph_scores_4(self, ok_thresh = ok_thresh):
         
-        dl = Dataloader(datadir = DATADIR+"test_data/test_data_4.csv")
+        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_4.csv")
         g = dl.load_data_to_graph()
         g.bfs_distance()
         g.calculate_scores(cvg_thresh = cvg_thresh)
@@ -91,7 +90,7 @@ class TestGraphDistances(unittest.TestCase):
 
     def test_graph_scores_5(self, ok_thresh = ok_thresh):
         
-        dl = Dataloader(datadir = DATADIR+"test_data/test_data_5.csv")
+        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_5.csv")
         g = dl.load_data_to_graph()
         g.bfs_distance()
         g.calculate_scores(cvg_thresh = cvg_thresh)

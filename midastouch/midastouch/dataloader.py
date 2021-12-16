@@ -9,6 +9,8 @@ class Dataloader:
     
     def load_original_data(self):
         self.df = pd.read_csv(self.datadir,index_col=False)
+        # only consider rows of dataframe that have a no nan entries
+        self.df = self.df.dropna(axis=0, how='any')
         self.loaded = True
 
     def load_data_to_graph(self):
@@ -53,3 +55,42 @@ class Dataloader:
             g.increase_weight(self.df.iloc[i]['investor_name'], self.df.iloc[i]['base_investor'], float(self.df.iloc[i]['strength']))
 
         return g
+    
+    def load_raw_data_to_graph(self):
+        ''' Assumes data is in the format of a csv file which contains the following columns:
+            - round_created_at
+            - round_name
+            - company_name
+            - investor_name
+            Returns an undirected graph where an edge between two VC funds is the number of times they co-invested 
+            in the same company. First, we do this regardless of the time of investment (or whether it was at the
+            same time). Later will implement different weighting based on funding rounds.
+        '''
+        # TODO: implement adding more weight (e.g. +x instead of +1) if brand-name investor invests in a later round
+
+        if not self.loaded:
+            self.load_original_data()
+
+        assert 'round_created_at' in self.df.columns, 'got the following columns: {}'.format(self.df.columns)
+        assert 'round_name' in self.df.columns, 'got the following columns: {}'.format(self.df.columns)
+        assert 'company_name' in self.df.columns, 'got the following columns: {}'.format(self.df.columns)
+        assert 'investor_name' in self.df.columns, 'got the following columns: {}'.format(self.df.columns)
+
+        g = Graph()
+        d = {} # key: company_name, value: list of investors that invested in that company
+        for i in range(len(self.df)):
+
+            if self.df.iloc[i]['company_name'] not in d:
+                d[self.df.iloc[i]['company_name']] = [self.df.iloc[i]['investor_name']]
+                g.add_node(self.df.iloc[i]['investor_name'])
+            else:
+                for investor in d[self.df.iloc[i]['company_name']]:
+                    # increase the weight of the edge between the two investors
+                    # weights are doubled if an investor invests twice
+                    # edges between an investor and himself are not constructed
+                    g.increase_weight(investor, self.df.iloc[i]['investor_name'], 1) 
+                d[self.df.iloc[i]['company_name']].append(self.df.iloc[i]['investor_name'])
+        
+        return g
+
+        

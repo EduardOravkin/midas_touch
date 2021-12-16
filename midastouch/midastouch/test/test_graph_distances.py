@@ -9,7 +9,7 @@ class TestGraphDistances(unittest.TestCase):
     
     def test_graph_distance_2(self):
             
-            dl = Dataloader(datadir = DATADIR+"test_data/test_data_2.csv")
+            dl = Dataloader(datadir = DATADIR+"test_data/test_graph_2.csv")
             g = dl.load_data_to_graph()
             g.bfs_distance()
 
@@ -19,7 +19,7 @@ class TestGraphDistances(unittest.TestCase):
 
     def test_graph_distance_3(self):
         
-        dl = Dataloader(datadir = DATADIR+"test_data/test_data_3.csv")
+        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_3.csv")
         g = dl.load_data_to_graph()
         g.bfs_distance()
 
@@ -29,7 +29,7 @@ class TestGraphDistances(unittest.TestCase):
 
     def test_graph_distance_5(self):
 
-        dl = Dataloader(datadir = DATADIR+"test_data/test_data_5.csv")
+        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_5.csv")
         g = dl.load_data_to_graph()
         g.bfs_distance()
 

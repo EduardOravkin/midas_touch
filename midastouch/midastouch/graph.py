@@ -85,11 +85,13 @@ class Graph:
     def increase_weight(self, key1, key2, weight=1):
         assert isinstance(weight, (int, np.int64, float)) , 'weight must be an integer or float, got {}'.format(type(weight))
 
-        if self.has_edge(key1, key2):
-            self.nodes[key1].neighbors[self.nodes[key2]] += weight
-            self.nodes[key2].neighbors[self.nodes[key1]] += weight
-        else:
-            self._add_edge(key1, key2, weight)
+        if not key1 == key2:
+            
+            if self.has_edge(key1, key2):
+                self.nodes[key1].neighbors[self.nodes[key2]] += weight
+                self.nodes[key2].neighbors[self.nodes[key1]] += weight
+            else:
+                self._add_edge(key1, key2, weight)
 
     def bfs(self, key):
         assert key in self.nodes, 'key not in graph, got {}'.format(key)

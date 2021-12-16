@@ -8,7 +8,7 @@ class TestDataloader(unittest.TestCase):
     
     def test_load_data_test_1(self):
         
-        dl = Dataloader(datadir = DATADIR+"test_data/test_data_1.csv")
+        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_1.csv")
         g = dl.load_data_to_graph()
 
         self.assertEqual(set(g.nodes.keys()), set(['Accel', 'X', 'Y']), msg=f"got {list(g.nodes.keys())}")
@@ -18,7 +18,7 @@ class TestDataloader(unittest.TestCase):
 
     def test_load_data_test_2(self):
 
-        dl = Dataloader(datadir = DATADIR+"test_data/test_data_2.csv")
+        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_2.csv")
         g = dl.load_data_to_graph()
 
         self.assertEqual(set(g.nodes.keys()), set(['Accel', 'X', 'Y', 'Z']), msg=f"got {list(g.nodes.keys())}")
@@ -30,7 +30,7 @@ class TestDataloader(unittest.TestCase):
 
     def test_load_data_test_3(self):
 
-        dl = Dataloader(datadir = DATADIR+"test_data/test_data_3.csv")
+        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_3.csv")
         g = dl.load_data_to_graph()
 
         self.assertEqual(set(g.nodes.keys()), set(['Accel', 'X', 'Y', 'Z', 'A', 'B']), 
