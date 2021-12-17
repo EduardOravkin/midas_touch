@@ -1,0 +1,15 @@
+some_investors = [
+'Bill Gates', 
+'Ridge Ventures',
+'Peter Thiel', 
+'YCombinator', 
+'M12', 
+'Redpoint eventures', 
+'WestWave Capital',
+'Earlybird Ventures', 
+'Commerce ventures', 
+'500 startups', 
+'Oceans', 
+'Techstars', 
+'500 Istanbul',
+]

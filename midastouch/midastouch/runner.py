@@ -2,8 +2,7 @@ from midastouch.dataloader import Dataloader
 from midastouch.brand_names import brand_names
 from midastouch.params import params
 import pandas as pd
-import time, datetime
-import json
+import time, datetime, json, os
 
 DATADIR = "/Users/eduardoravkin/Desktop/software/vela_eo/Data/midas/"
 EXPERIMENT_DIR = "/Users/eduardoravkin/Desktop/software/vela_eo/experiments/midas/"
@@ -43,11 +42,17 @@ class Runner:
 
         df = pd.DataFrame([])
         for node_key in g.nodes:
-            df = df.append(pd.DataFrame([[node_key, g.nodes[node_key].score, g.nodes[node_key].distance]], columns = ['investor_name', 'score', 'distance']))
+            df = df.append(pd.DataFrame([[
+                                        node_key, 
+                                        g.nodes[node_key].score,
+                                        g.nodes[node_key].distance,
+                                        g.nodes[node_key].investments,
+                                        {node.key: g.nodes[node_key].neighbors[node] for node in g.nodes[node_key].neighbors.keys()},
+                                        ]], columns = ['investor_name', 'score', 'distance', 'investments', 'neighbors']))
         
-        # TODO: save dataframe, params and log to a separate directory
-        df.to_csv(f'{self.experiment_dir}/experiment_{self.timestamp}.csv', index = False)
-        with open(f'params_{self.timestamp}.py', 'w') as params_file:
+        os.makedirs(self.experiment_dir+f'experiment_{self.timestamp}', exist_ok=True)
+        df.to_csv(f'{self.experiment_dir}/experiment_{self.timestamp}/experiment_{self.timestamp}.csv', index = False)
+        with open(f'experiment_{self.timestamp}/params_{self.timestamp}.py', 'w') as params_file:
             params_file.write(json.dumps(vars(self)))        
 
 if __name__ == '__main__':
