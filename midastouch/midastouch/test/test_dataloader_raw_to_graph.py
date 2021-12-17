@@ -41,3 +41,12 @@ class TestRawToGraph(unittest.TestCase):
                             msg="got {}".format([(node.key, g.nodes['VC_b'].neighbors[node]) for node in g.nodes['VC_b'].neighbors]))
             self.assertTrue([(node.key, g.nodes['VC_c'].neighbors[node]) for node in g.nodes['VC_c'].neighbors] == [('VC_a', 3), ('VC_b', 1)],
                             msg="got {}".format([(node.key, g.nodes['VC_c'].neighbors[node]) for node in g.nodes['VC_c'].neighbors]))
+    
+    def test_raw_to_graph_4(self):
+            # tests whether node investments are correctly calculated
+            dl = Dataloader(datadir = DATADIR+"test_data/test_raw_data_4.csv")
+            g = dl.load_raw_data_to_graph()
+
+            self.assertTrue(g.nodes['VC_a'].investments == 2, msg="got {}".format(g.nodes['VC_a'].investments))
+            self.assertTrue(g.nodes['VC_b'].investments == 3, msg="got {}".format(g.nodes['VC_b'].investments))
+            self.assertTrue(g.nodes['VC_c'].investments == 1, msg="got {}".format(g.nodes['VC_c'].investments))

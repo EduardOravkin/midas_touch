@@ -4,7 +4,6 @@ from midastouch.dataloader import Dataloader
 
 DATADIR = "/Users/eduardoravkin/Desktop/software/vela_eo/Data/midas/"
 
-
 class TestGraphDistances(unittest.TestCase):
     
     def test_graph_distance_2(self):

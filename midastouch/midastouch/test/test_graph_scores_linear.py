@@ -1,19 +1,29 @@
 import unittest
-from midastouch.graph import Graph
 from midastouch.dataloader import Dataloader
+from midastouch.params import DATADIR
+from midastouch.brand_names import brand_names
 
-DATADIR = "/Users/eduardoravkin/Desktop/software/vela_eo/Data/midas/"
 ok_thresh = 0.01
-cvg_thresh = 0.01
+
+#TODO: implemennt passing params like this for all tests
+params = {
+'datadir' : DATADIR,
+'before_after_weights' : {'before':1, 'same time': 1, 'after':1},
+'decay' : 'linear',
+'max_dist' : 4,
+'n_investments' : float('inf'),
+'cvg_thresh' : 0.001,
+'brand_names' : brand_names
+}
 
 class TestGraphScores(unittest.TestCase):
     
     def test_graph_scores_1(self, ok_thresh = ok_thresh):
             
-            dl = Dataloader(datadir = DATADIR+"test_data/test_graph_1.csv")
+            dl = Dataloader(datadir = params['datadir']+"test_data/test_graph_1.csv")
             g = dl.load_data_to_graph()
-            g.bfs_distance()
-            g.calculate_scores(cvg_thresh = cvg_thresh)
+            g.bfs_distance(brand_names=params['brand_names'])
+            g.calculate_scores(max_dist=params['max_dist'], decay=params['decay'], cvg_thresh=params['cvg_thresh'])
 
             true_scores = {
                 'Accel': 1,
@@ -22,6 +32,10 @@ class TestGraphScores(unittest.TestCase):
             }
             proposed_scores = {node.key : node.score for node in g.bfs('Accel')}
 
+            print([(node.key, g.nodes['X'].neighbors[node])for node in g.nodes['X'].neighbors])
+            print([(node.key, g.nodes['Accel'].neighbors[node])for node in g.nodes['Accel'].neighbors])
+            print([(node.key, g.nodes['Y'].neighbors[node])for node in g.nodes['Y'].neighbors])
+
             self.assertTrue(all([abs(proposed_scores[key] - true_scores[key]) < ok_thresh for key in true_scores.keys()]),
                             msg=f"got {[(node.key, node.distance, node.score) for node in g.bfs('Accel')]}"
                             )
@@ -29,10 +43,10 @@ class TestGraphScores(unittest.TestCase):
 
     def test_graph_scores_2(self, ok_thresh = ok_thresh):
         
-        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_2.csv")
+        dl = Dataloader(datadir = params['datadir']+"test_data/test_graph_2.csv")
         g = dl.load_data_to_graph()
-        g.bfs_distance()
-        g.calculate_scores(cvg_thresh = cvg_thresh)
+        g.bfs_distance(brand_names=params['brand_names'])
+        g.calculate_scores(max_dist=params['max_dist'], decay=params['decay'], cvg_thresh=params['cvg_thresh'])
 
         true_scores = {
             'Accel': 1,
@@ -49,10 +63,10 @@ class TestGraphScores(unittest.TestCase):
 
     def test_graph_scores_3(self, ok_thresh = ok_thresh):
         
-        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_3.csv")
+        dl = Dataloader(datadir = params['datadir']+"test_data/test_graph_3.csv")
         g = dl.load_data_to_graph()
-        g.bfs_distance()
-        g.calculate_scores(cvg_thresh = cvg_thresh)
+        g.bfs_distance(brand_names=params['brand_names'])
+        g.calculate_scores(max_dist=params['max_dist'], decay=params['decay'], cvg_thresh=params['cvg_thresh'])
 
         true_scores = {
             'Accel': 1,
@@ -71,10 +85,10 @@ class TestGraphScores(unittest.TestCase):
     
     def test_graph_scores_4(self, ok_thresh = ok_thresh):
         
-        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_4.csv")
+        dl = Dataloader(datadir = params['datadir']+"test_data/test_graph_4.csv")
         g = dl.load_data_to_graph()
-        g.bfs_distance()
-        g.calculate_scores(cvg_thresh = cvg_thresh)
+        g.bfs_distance(brand_names=params['brand_names'])
+        g.calculate_scores(max_dist=params['max_dist'], decay=params['decay'], cvg_thresh=params['cvg_thresh'])
 
         true_scores = {
             'Accel': 1,
@@ -90,10 +104,10 @@ class TestGraphScores(unittest.TestCase):
 
     def test_graph_scores_5(self, ok_thresh = ok_thresh):
         
-        dl = Dataloader(datadir = DATADIR+"test_data/test_graph_5.csv")
+        dl = Dataloader(datadir = params['datadir']+"test_data/test_graph_5.csv")
         g = dl.load_data_to_graph()
-        g.bfs_distance()
-        g.calculate_scores(cvg_thresh = cvg_thresh)
+        g.bfs_distance(brand_names=params['brand_names'])
+        g.calculate_scores(max_dist=params['max_dist'], decay=params['decay'], cvg_thresh=params['cvg_thresh'])
 
         true_scores = {
             'Accel': 1,
@@ -113,10 +127,10 @@ class TestGraphScores(unittest.TestCase):
     
     def test_graph_scores_initial_given_data(self, ok_thresh = ok_thresh):
         
-        dl = Dataloader(datadir = DATADIR+"ventech_RMap.csv")
+        dl = Dataloader(datadir = params['datadir']+"ventech_RMap.csv")
         g = dl.load_data_to_graph()
-        g.bfs_distance()
-        g.calculate_scores(cvg_thresh = cvg_thresh)
+        g.bfs_distance(params['brand_names'])
+        g.calculate_scores(max_dist=params['max_dist'], decay=params['decay'], cvg_thresh=params['cvg_thresh'])
 
         # the ventech dataset is such that all of the edges have
         # one of the brand name investors as a target
@@ -126,6 +140,6 @@ class TestGraphScores(unittest.TestCase):
 
         self.assertTrue(all([abs(proposed_scores[key] - 1) < ok_thresh for key in proposed_scores.keys()]))    
     
-
+    
 if __name__ == '__main__':
     unittest.main()
