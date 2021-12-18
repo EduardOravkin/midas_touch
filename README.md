@@ -52,7 +52,7 @@ Once the data is downloaded and placed in the correct directories, run
 `
 jupyter lab analysis.ipynb
 `
-from the root of the directory and go through the jupyter notebook which guides one through the analysis of a sample experiment.
+from the root of the directory, choose the `midas_env` kernel in the jupyter notebook, and go through the jupyter notebook which guides one through the analysis of a sample experiment.
 In the folder 
 ```
 experiments/

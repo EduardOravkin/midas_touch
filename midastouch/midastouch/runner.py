@@ -21,7 +21,7 @@ class Runner:
                 cvg_thresh = 0.001,
                 ):
         self.datadir = datadir
-        self.timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d_%H:%M:%S')
+        self.timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y_%m_%d_%H_%M_%S')
         self.experiment_dir = experiment_dir
         self.before_after_weights = before_after_weights
         self.decay = decay
