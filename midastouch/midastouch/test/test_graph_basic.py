@@ -1,8 +1,6 @@
 import unittest
 from midastouch.graph import Graph
-from midastouch.dataloader import Dataloader
-
-DATADIR = "/Users/eduardoravkin/Desktop/software/vela_eo/Data/midas/"
+from midastouch.params import DATADIR
 
 
 class TestGraphBasic(unittest.TestCase):

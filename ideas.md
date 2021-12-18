@@ -6,4 +6,6 @@
 
 3. Is it possible to make this fully undirected ?
 
-# TODO: get root directory to vela_eo in DATADIR and EXPERIMENTDIR
+# TODO: make sure to upload the repo in such a state that one can pull all the data to perform tests (and also get the full dataset from somewhere)
+
+# TODO: add all conda requirements correctly

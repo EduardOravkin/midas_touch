@@ -1,11 +1,9 @@
 from midastouch.dataloader import Dataloader
 from midastouch.brand_names import brand_names
 from midastouch.params import params
+from midastouch.params import DATADIR, EXPERIMENT_DIR
 import pandas as pd
 import time, datetime, json, os
-
-DATADIR = "/Users/eduardoravkin/Desktop/software/vela_eo/Data/midas/"
-EXPERIMENT_DIR = "/Users/eduardoravkin/Desktop/software/vela_eo/experiments/midas/"
 
 class Runner:
     ''' 

@@ -1,6 +1,8 @@
-DATADIR = "/Users/eduardoravkin/Desktop/software/vela_eo/Data/midas/"
-EXPERIMENT_DIR = "/Users/eduardoravkin/Desktop/software/vela_eo/experiments/midas/"
 from midastouch.brand_names import brand_names
+import os
+root_dir_path = os.path.dirname(os.path.realpath(__file__))+'/../../'
+DATADIR = root_dir_path + 'Data/midas/'
+EXPERIMENT_DIR = root_dir_path + 'experiments/midas/'
 
 params = {
 'datadir' : DATADIR+"midas_touch_dataset_eduard.csv",

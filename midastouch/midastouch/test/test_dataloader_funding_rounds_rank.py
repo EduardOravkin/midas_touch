@@ -1,8 +1,8 @@
 import unittest
 from midastouch.graph import Graph
 from midastouch.dataloader import Dataloader
+from midastouch.params import DATADIR
 
-DATADIR = "/Users/eduardoravkin/Desktop/software/vela_eo/Data/midas/"
 
 class TestRoundsRank(unittest.TestCase):
     

@@ -1,7 +1,7 @@
 import unittest
 from midastouch.dataloader import Dataloader
+from midastouch.params import DATADIR
 
-DATADIR = "/Users/eduardoravkin/Desktop/software/vela_eo/Data/midas/"
 
 class TestRareInvestors(unittest.TestCase):
 
